@@ -1,16 +1,14 @@
-package com.glinskikh.englishcard.dto;
+package com.glinskikh.englishcard.dto.requests;
 
-import com.glinskikh.englishcard.model.Card;
 import com.glinskikh.englishcard.model.User;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class CardRs {
+public class CardRq {
 
     private String word;
 
     private String translationWord;
 
+    private User user;
 }

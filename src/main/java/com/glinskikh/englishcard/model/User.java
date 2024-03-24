@@ -1,6 +1,7 @@
 package com.glinskikh.englishcard.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -27,14 +28,23 @@ public class User {
 
     @Column(name = "second_name")
     private String secondName;
+
     @Column(name = "email")
     @Email
     private String email;
 
-    @Column(name = "role")
-    private String role;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Card> cards;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", email='" + email + '\'' +
+                ", cards=" + cards.stream().map(Card::getId).collect(Collectors.toList())+
+                '}';
+    }
 }

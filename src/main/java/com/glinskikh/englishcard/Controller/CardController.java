@@ -1,11 +1,9 @@
 package com.glinskikh.englishcard.Controller;
 
 import com.glinskikh.englishcard.Service.CardService;
-import com.glinskikh.englishcard.dto.CardRq;
-import com.glinskikh.englishcard.dto.CardRs;
-import com.glinskikh.englishcard.dto.PagedResponse;
-import com.glinskikh.englishcard.dto.UserRs;
-import com.glinskikh.englishcard.model.Card;
+import com.glinskikh.englishcard.dto.requests.CardRq;
+import com.glinskikh.englishcard.dto.responses.CardRs;
+import com.glinskikh.englishcard.dto.responses.PagedRs;
 import com.glinskikh.englishcard.util.AppConstants;
 import com.glinskikh.englishcard.util.EntityException;
 import com.glinskikh.englishcard.util.ExceptionResponse;
@@ -13,10 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/cards")
@@ -26,9 +20,9 @@ public class CardController {
     private final CardService cardService;
 
     @GetMapping()
-    public ResponseEntity<PagedResponse<CardRs>> findAll(@RequestParam(value = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
-                                                         @RequestParam(value = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size) {
-        PagedResponse<CardRs> response = cardService.findAll(page, size);
+    public ResponseEntity<PagedRs<CardRs>> findAll(@RequestParam(value = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
+                                                   @RequestParam(value = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size) {
+        PagedRs<CardRs> response = cardService.findAll(page, size);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -39,10 +33,10 @@ public class CardController {
     }
 
     @GetMapping("/userId/{userId}")
-    public ResponseEntity<PagedResponse<CardRs>>  findAllByUserId(@PathVariable Long userId,
-                                                  @RequestParam(value = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
-                                                  @RequestParam(value = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size) {
-        PagedResponse<CardRs> response = cardService.findByUserId(userId, page, size);
+    public ResponseEntity<PagedRs<CardRs>>  findAllByUserId(@PathVariable Long userId,
+                                                            @RequestParam(value = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
+                                                            @RequestParam(value = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size) {
+        PagedRs<CardRs> response = cardService.findByUserId(userId, page, size);
         return new ResponseEntity< >(response, HttpStatus.OK);
     }
 

@@ -1,5 +1,6 @@
 package com.glinskikh.englishcard.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -22,9 +23,18 @@ public class Card {
     @Column(name = "translation_word")
     private String translationWord;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "id_user")
     @JsonIgnore
     private User user;
 
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id=" + id +
+                ", word='" + word + '\'' +
+                ", translationWord='" + translationWord + '\'' +
+                ", user=" + user.getId() +
+                '}';
+    }
 }

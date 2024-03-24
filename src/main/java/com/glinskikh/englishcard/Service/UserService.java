@@ -1,15 +1,15 @@
 package com.glinskikh.englishcard.Service;
 
-import com.glinskikh.englishcard.dto.PagedResponse;
-import com.glinskikh.englishcard.dto.UserRq;
-import com.glinskikh.englishcard.dto.UserRs;
+import com.glinskikh.englishcard.dto.responses.PagedRs;
+import com.glinskikh.englishcard.dto.requests.UserRq;
+import com.glinskikh.englishcard.dto.responses.UserRs;
 
 public interface UserService {
     UserRs findById(Long id);
 
     UserRs findByUsername(String username);
 
-    PagedResponse<UserRs> findAll(Integer page, Integer size, String sortBy, String sortDirection);
+    PagedRs<UserRs> findAll(Integer page, Integer size, String sortBy, String sortDirection);
 
     UserRs addUser(UserRq userToAdd);
 

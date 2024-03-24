@@ -1,4 +1,4 @@
-package com.glinskikh.englishcard.dto;
+package com.glinskikh.englishcard.dto.responses;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Data
-public class PagedResponse<T> {
+public class PagedRs<T> {
     private List<T> content;
     private int page;
     private int size;
@@ -15,11 +15,11 @@ public class PagedResponse<T> {
     private int totalPages;
     private boolean last;
 
-    public PagedResponse() {
+    public PagedRs() {
 
     }
 
-    public PagedResponse(List<T> content, int page, int size, long totalElements, int totalPages, boolean last) {
+    public PagedRs(List<T> content, int page, int size, long totalElements, int totalPages, boolean last) {
         setContent(content);
         this.page = page;
         this.size = size;

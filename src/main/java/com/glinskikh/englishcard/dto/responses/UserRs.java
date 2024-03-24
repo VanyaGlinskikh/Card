@@ -1,4 +1,4 @@
-package com.glinskikh.englishcard.dto;
+package com.glinskikh.englishcard.dto.responses;
 
 import com.glinskikh.englishcard.model.Card;
 import com.glinskikh.englishcard.model.User;
@@ -17,4 +17,5 @@ public class UserRs {
     private String secondName;
 
     private String email;
+
 }

@@ -1,4 +1,4 @@
-package com.glinskikh.englishcard.dto;
+package com.glinskikh.englishcard.dto.requests;
 
 import com.glinskikh.englishcard.model.Card;
 import lombok.Data;
@@ -18,10 +18,6 @@ public class UserRq {
 
     private String secondName;
 
-    @Email(message = "Invalid email format")
     private String email;
-
-    private List<Card> cards;
-
 
 }

@@ -1,8 +1,8 @@
 package com.glinskikh.englishcard.Service;
 
-import com.glinskikh.englishcard.dto.CardRq;
-import com.glinskikh.englishcard.dto.CardRs;
-import com.glinskikh.englishcard.dto.PagedResponse;
+import com.glinskikh.englishcard.dto.requests.CardRq;
+import com.glinskikh.englishcard.dto.responses.CardRs;
+import com.glinskikh.englishcard.dto.responses.PagedRs;
 import com.glinskikh.englishcard.model.Card;
 import com.glinskikh.englishcard.model.User;
 import com.glinskikh.englishcard.repo.CardRepository;
@@ -39,7 +39,7 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public PagedResponse<CardRs> findByUserId(Long userId, Integer page, Integer size) {
+    public PagedRs<CardRs> findByUserId(Long userId, Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Card> cards = cardRepository.findByUserId(userId, pageable);
         List<CardRs> content = cards.getNumberOfElements() == 0 ? Collections.emptyList() :
@@ -49,14 +49,14 @@ public class CardServiceImpl implements CardService{
         if (content.isEmpty())
             throw new EntityException("User or cards not found");
         else
-            return new PagedResponse<>(content, cards.getNumber(), cards.getSize(), cards.getTotalElements(),
+            return new PagedRs<>(content, cards.getNumber(), cards.getSize(), cards.getTotalElements(),
                     cards.getTotalPages(), cards.isLast());
 
         }
 
 
     @Override
-    public PagedResponse<CardRs> findAll(Integer page, Integer size) {
+    public PagedRs<CardRs> findAll(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Card> cards = cardRepository.findAll(pageable);
         List<CardRs> content = cards.getNumberOfElements() == 0 ? Collections.emptyList() :
@@ -66,7 +66,7 @@ public class CardServiceImpl implements CardService{
         if (content.isEmpty())
             throw new EntityException("Cards not found");
         else
-            return new PagedResponse<>(content, cards.getNumber(), cards.getSize(), cards.getTotalElements(),
+            return new PagedRs<>(content, cards.getNumber(), cards.getSize(), cards.getTotalElements(),
                     cards.getTotalPages(), cards.isLast());
     }
 

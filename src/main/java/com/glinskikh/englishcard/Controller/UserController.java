@@ -1,11 +1,9 @@
 package com.glinskikh.englishcard.Controller;
 
 import com.glinskikh.englishcard.Service.UserService;
-import com.glinskikh.englishcard.dto.PagedResponse;
-import com.glinskikh.englishcard.dto.UserRq;
-import com.glinskikh.englishcard.dto.UserRs;
-import com.glinskikh.englishcard.model.Card;
-import com.glinskikh.englishcard.model.User;
+import com.glinskikh.englishcard.dto.responses.PagedRs;
+import com.glinskikh.englishcard.dto.requests.UserRq;
+import com.glinskikh.englishcard.dto.responses.UserRs;
 import com.glinskikh.englishcard.util.AppConstants;
 import com.glinskikh.englishcard.util.ExceptionResponse;
 import com.glinskikh.englishcard.util.EntityException;
@@ -15,17 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
 @RestController
 @RequestMapping("api/users")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-    private final ModelMapper modelMapper;
 
 
     @GetMapping("/{id}")
@@ -35,17 +28,17 @@ public class UserController {
     }
 
     @GetMapping("name/{username}")
-    public ResponseEntity<UserRs> findById(@PathVariable("username") String username) {
+    public ResponseEntity<UserRs> findByUsername(@PathVariable("username") String username) {
         UserRs response = userService.findByUsername(username);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     @GetMapping()
-    public ResponseEntity<PagedResponse<UserRs>> findAll(@RequestParam(value = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
-                                                         @RequestParam(value = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size,
-                                                         @RequestParam(required = false, defaultValue = "username") String sortBy,
-                                                         @RequestParam(defaultValue = "asc") String sortDirection) {
-        PagedResponse<UserRs> response = userService.findAll(page, size, sortBy, sortDirection);
+    public ResponseEntity<PagedRs<UserRs>> findAll(@RequestParam(value = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
+                                                   @RequestParam(value = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size,
+                                                   @RequestParam(required = false, defaultValue = "username") String sortBy,
+                                                   @RequestParam(defaultValue = "asc") String sortDirection) {
+        PagedRs<UserRs> response = userService.findAll(page, size, sortBy, sortDirection);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

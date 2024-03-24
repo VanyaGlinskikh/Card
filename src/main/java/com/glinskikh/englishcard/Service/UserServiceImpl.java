@@ -1,8 +1,8 @@
 package com.glinskikh.englishcard.Service;
 
-import com.glinskikh.englishcard.dto.PagedResponse;
-import com.glinskikh.englishcard.dto.UserRq;
-import com.glinskikh.englishcard.dto.UserRs;
+import com.glinskikh.englishcard.dto.responses.PagedRs;
+import com.glinskikh.englishcard.dto.requests.UserRq;
+import com.glinskikh.englishcard.dto.responses.UserRs;
 import com.glinskikh.englishcard.model.User;
 import com.glinskikh.englishcard.repo.UserRepository;
 import com.glinskikh.englishcard.util.EntityException;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    public PagedResponse<UserRs> findAll(Integer page, Integer size, String sortBy, String sortDirection){
+    public PagedRs<UserRs> findAll(Integer page, Integer size, String sortBy, String sortDirection){
         Sort sort = Sort.by(sortDirection.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
         Page<User> users = userRepository.findAll(pageable);
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService{
         if (content.isEmpty())
             throw new EntityException("Users not found");
         else
-            return new PagedResponse<>(content, users.getNumber(), users.getSize(), users.getTotalElements(),
+            return new PagedRs<>(content, users.getNumber(), users.getSize(), users.getTotalElements(),
                     users.getTotalPages(), users.isLast());
     }
 

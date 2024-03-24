@@ -1,20 +1,16 @@
 package com.glinskikh.englishcard.Service;
 
-import com.glinskikh.englishcard.dto.CardRq;
-import com.glinskikh.englishcard.dto.CardRs;
-import com.glinskikh.englishcard.dto.PagedResponse;
-import com.glinskikh.englishcard.model.Card;
-
-import java.util.List;
-import java.util.Optional;
+import com.glinskikh.englishcard.dto.requests.CardRq;
+import com.glinskikh.englishcard.dto.responses.CardRs;
+import com.glinskikh.englishcard.dto.responses.PagedRs;
 
 
 public interface CardService {
 
 
-    PagedResponse<CardRs> findByUserId(Long userId, Integer page, Integer size);
+    PagedRs<CardRs> findByUserId(Long userId, Integer page, Integer size);
 
-    PagedResponse<CardRs> findAll(Integer page, Integer size);
+    PagedRs<CardRs> findAll(Integer page, Integer size);
 
     CardRs addCard(CardRq cardRq, Long IdUser);
 
