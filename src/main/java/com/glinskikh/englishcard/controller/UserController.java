@@ -1,6 +1,6 @@
-package com.glinskikh.englishcard.Controller;
+package com.glinskikh.englishcard.controller;
 
-import com.glinskikh.englishcard.Service.UserService;
+import com.glinskikh.englishcard.service.UserService;
 import com.glinskikh.englishcard.dto.responses.PagedRs;
 import com.glinskikh.englishcard.dto.requests.UserRq;
 import com.glinskikh.englishcard.dto.responses.UserRs;
@@ -8,7 +8,6 @@ import com.glinskikh.englishcard.util.AppConstants;
 import com.glinskikh.englishcard.util.ExceptionResponse;
 import com.glinskikh.englishcard.util.EntityException;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

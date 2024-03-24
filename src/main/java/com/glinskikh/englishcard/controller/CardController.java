@@ -1,6 +1,6 @@
-package com.glinskikh.englishcard.Controller;
+package com.glinskikh.englishcard.controller;
 
-import com.glinskikh.englishcard.Service.CardService;
+import com.glinskikh.englishcard.service.CardService;
 import com.glinskikh.englishcard.dto.requests.CardRq;
 import com.glinskikh.englishcard.dto.responses.CardRs;
 import com.glinskikh.englishcard.dto.responses.PagedRs;

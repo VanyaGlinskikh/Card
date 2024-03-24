@@ -1,4 +1,4 @@
-package com.glinskikh.englishcard.Service;
+package com.glinskikh.englishcard.service;
 
 import com.glinskikh.englishcard.dto.responses.PagedRs;
 import com.glinskikh.englishcard.dto.requests.UserRq;
